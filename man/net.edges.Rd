@@ -2,10 +2,10 @@
 \alias{net.edges}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-List the edges in a network
+List the edges of each graph in the input list of multiple graphs
 }
 \description{
-For each class, list every pair of connected nodes.
+List every estimated edge in the form of pair of connected nodes for each graph in the input list of multiple graphs.
 }
 \usage{
 net.edges(theta)
@@ -13,22 +13,22 @@ net.edges(theta)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{theta}{
-A list of pXp matrices, each an estimated sparse inverse covariance matrix.  (For example, the result of FGL or GGL.)
+An input list of multiple graphs. Each graph is represented as a pXp matrix. (For example, the result of the SIMULE algorithm: a list of pXp matrices in which each matrix represents an estimated sparse inverse covariance matrix.)
 }
 }
 
 \value{
-edges, a K-length list, each element of the list an igraph.es object detailing all pairs of connected nodes in the class.
+edges, a length K list, each element of the list represents an igraph.es object which is the detail of all pairs of connected nodes of each graph in the input list of multiple graphs.
 }
 \references{
-Beilun Wang, Ritambhara Singh and Yanjun Qi (2017).  A Constrained L1 Minimization Approach for Estimating Multiple Sparse Gaussian or Nonparanormal Graphical Models. <arXiv:1605.03468>
+Beilun Wang, Ritambhara Singh, Yanjun Qi (2017).  A constrained L1 minimization approach for estimating multiple Sparse Gaussian or Nonparanormal Graphical Models. <http://link.springer.com/article/10.1007/s10994-017-5635-7>
 }
 \author{
 Beilun Wang}
 
 \examples{
 \dontrun{
-## load an example dataset with K=two tasks, p=100 features, and n=200 samples per task:
+## load an example multi-task dataset with K=2 tasks, p=100 features, and n=200 samples per task:
 data(exampleData)
 ##run simule
 result = simule(X = exampleData , 0.05, 1, covType = "cov", FALSE)

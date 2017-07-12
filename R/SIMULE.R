@@ -27,13 +27,14 @@
 }
 
 # (N)SIMULE implementation
-simule <- function(X, lambda, epsilon, covType = "cov",parallel = FALSE ){
+simule <- function(X, lambda, epsilon = 1, covType = "cov",parallel = FALSE ){
     #get number of tasks
     N = length(X)
     #get the cov/cor matrices
     if (isSymmetric(X[[1]]) == FALSE){
       try(if (covType %in% c("cov","kendall") == FALSE) stop("The cov/cor type you specifies is not include in this package. Please use your own function to obtain the list of cov/cor and use them as the input of simule()"))
-      if (covType == "cov"){
+      if (covType == "cov")
+      {
         for (i in 1:N){
           X[[i]] = cov(X[[i]])
         }
@@ -116,17 +117,49 @@ simule <- function(X, lambda, epsilon, covType = "cov",parallel = FALSE ){
             }
         }
     }
-    out = list(Graphs = Graphs)
+    share = 1/(epsilon * N) * xt[(1 + N * p):((N + 1) * p),]
+    for(j in 1:p){
+      for(k in j:p){
+        if (abs(share[j,k]) < abs(share[k,j])){
+          share[j,k] = share[j,k]
+          share[k,j] = share[j,k]
+        }
+        else{
+          share[j,k] = share[k,j]
+          share[k,j] = share[k,j]
+        }
+      }
+    }
+    out = list(Graphs = Graphs, share = share)
     class(out) = "simule"
     return(out)
 }
 
 plot.simule <-
-  function(x,...)
+  function(x, type="graph", subID=NULL, index=NULL, ...)
   {
     .env = "environment: namespace:simule"
     #UseMethod("plot")
-    Graphs = x$Graphs
+    tmp = x$Graphs
+    Graphs = list()
+    p = dim(tmp[[1]])[1]
+    if (type == "share"){
+      Graphs[[1]] = x$share
+    }
+    if (type == "sub"){
+      Graphs[[1]] = tmp[[subID]] - x$share
+    }
+    if (type == "graph"){
+      Graphs = tmp
+    }
+    if (type == "neighbor"){
+      id = matrix(0,p,p)
+      id[index,] = rep(1,p)
+      id[,index] = rep(1,p)
+      for (i in 1:length(tmp)){
+        Graphs[[i]] = tmp[[i]] * id
+      }
+    }
     K=length(Graphs)
     adj = .make.adj.matrix(Graphs)
     diag(adj)=0
