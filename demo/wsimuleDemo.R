@@ -10,32 +10,32 @@ pause <- function() {}
 data(cancer)
 X = list(as.matrix(cancer[[1]][which(cancer[[2]] == "not"),]), as.matrix(cancer[[1]][which(cancer[[2]] == "pcr"),]))
 
-### run the simule
-results = simule(X, 0.05, 1, covType = "cov", TRUE)
+### run the wsimule
+results = wsimule(X, 0.05, 1, W = matrix(1,26,26) , covType = "cov", TRUE)
 results
 
 pause()
 
-### plot the estimated graphs by simule
-plot.simule(results)
+### plot the estimated graphs by wsimule
+plot.wsimule(results)
 
 
 pause()
 
-### plot the shared subgraph that is shared by all estimated graphs by simule
-plot.simule(results, type="share")
+### plot the shared subgraph that is shared by all estimated graphs by wsimule
+plot.wsimule(results, type="share")
 
 
 pause()
 
-### plot the estimated task-specific graph whose task index="sub" by simule
-plot.simule(results, type="sub", subID=1)
+### plot the estimated task-specific graph whose task index="sub" by wsimule
+plot.wsimule(results, type="sub", subID=1)
 
 
 pause()
 
 ### plot the estimated subgraphs that is about a specific node
-plot.simule(results, type="neighbor", index=15)
+plot.wsimule(results, type="neighbor", index=15)
 
 
 ### load the  example data (larger p)
@@ -47,7 +47,7 @@ pause()
 
 ### run simule algorithm to estimate two sparse precision matrices from the exampleData
 
-results = simule(X = exampleData , 0.05, 1, covType = "cov", TRUE)
+results = wsimule(X = exampleData , 0.05, 1, W = matrix(1,100,100), covType = "cov", TRUE)
 results
 
 
@@ -91,20 +91,20 @@ neighbors
 
 pause()
 
-### plot the estimated graphs by simule
-plot.simule(results)
+### plot the estimated graphs by wsimule
+plot.wsimule(results)
 
 
 pause()
 
-### plot the shared subgraph that is shared by all estimated graphs by simule
-plot.simule(results, type="share")
+### plot the shared subgraph that is shared by all estimated graphs by wsimule
+plot.wsimule(results, type="share")
 
 
 pause()
 
-### plot the estimated task-specific graph whose task index="sub" by simule
-plot.simule(results, type="sub", subID=1)
+### plot the estimated task-specific graph whose task index="sub" by wsimule
+plot.wsimule(results, type="sub", subID=1)
 
 
 pause()
