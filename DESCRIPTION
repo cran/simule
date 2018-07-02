@@ -1,10 +1,12 @@
 Package: simule
-Version: 1.2.0
-Date: 2017-11-01
+Version: 1.3.0
+Date: 2018-07-02
 Title: A Constrained L1 Minimization Approach for Estimating Multiple
         Sparse Gaussian or Nonparanormal Graphical Models
-Authors@R: c(person("Beilun", "Wang", role = c("aut", "cre"), email = "bw4mw@virginia.edu"), person("Yanjun", "Qi", role = "aut", email = "yanjun@virginia.edu"))
-Author: Beilun Wang [aut, cre], Yanjun Qi [aut]
+Authors@R: c(person("Beilun", "Wang", role = c("aut", "cre"), email = "bw4mw@virginia.edu"), person("Yanjun", "Qi", role = "aut", email = "yanjun@virginia.edu"),person("Zhaoyang", "Wang", role = c("aut"), email = "zw4dn@virginia.edu"))
+Author: Beilun Wang [aut, cre],
+  Yanjun Qi [aut],
+  Zhaoyang Wang [aut]
 Maintainer: Beilun Wang <bw4mw@virginia.edu>
 Depends: R (>= 3.0.0), lpSolve, pcaPP, igraph
 Suggests: parallel
@@ -14,6 +16,6 @@ URL: https://github.com/QData/SIMULE
 BugReports: https://github.com/QData/SIMULE
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-11-01 05:17:22 UTC; beilunwang
+Packaged: 2018-07-02 20:41:57 UTC; Karen Chen
 Repository: CRAN
-Date/Publication: 2017-11-01 06:29:20 UTC
+Date/Publication: 2018-07-02 21:10:03 UTC
